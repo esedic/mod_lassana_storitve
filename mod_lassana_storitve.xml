@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.4" client="site" method="upgrade">
+	<name>Lassana - storitve v salonih</name>
+	<author>Elvis Sedić</author>
+	<creationDate>Junij 2016</creationDate>
+	<copyright>Copyright (C) Elvis Sedić. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<authorEmail>elvis@spletodrom.com</authorEmail>
+	<authorUrl>http://www.spletodrom.com</authorUrl>
+	<version>1.0.0</version>
+	<description>Module to display selected articles.</description>
+	<files>
+		<filename module="mod_lassana_storitve">mod_lassana_storitve.php</filename>
+		<folder>tmpl</folder>
+		<filename>helper.php</filename>
+	</files>
+	<languages folder="languages">
+		<language tag="en-GB">en-GB.mod_lassana_storitve.ini</language>
+		<language tag="en-GB">en-GB.mod_lassana_storitve.sys.ini</language>
+		<language tag="sl-SI">sl-SI.mod_lassana_storitve.ini</language>
+		<language tag="sl-SI">sl-SI.mod_lassana_storitve.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field 
+					name="articles" 
+					type="sql" 
+					default="10" 
+					multiple="true"
+					size="10"
+					description="MOD_LASSANA_STORITVE_FIELD_ARTICLES_DESC"
+					label="MOD_LASSANA_STORITVE_FIELD_ARTICLES_LABEL" 
+					query="SELECT id, title FROM #__content WHERE catid = 11 ORDER BY title" 
+					key_field="id" 
+					value_field="title" />
+
+				<field
+					name="ordering"
+					type="list"
+					default="a.publish_up"
+					label="MOD_LASSANA_STORITVE_FIELD_ORDERING_LABEL"
+					description="MOD_LASSANA_STORITVE_FIELD_ORDERING_DESC">
+					<option
+						value="a.title">MOD_LASSANA_STORITVE_FIELD_ORDERING_TITLE</option>
+					<option
+						value="a.publish_up">MOD_LASSANA_STORITVE_FIELD_ORDERING_PUBLISHED_DATE</option>
+					<option
+						value="a.created">MOD_LASSANA_STORITVE_FIELD_ORDERING_CREATED_DATE</option>
+					<option
+						value="a.ordering">MOD_LASSANA_STORITVE_FIELD_ORDERING_ORDERING</option>
+					<option
+						value="rand()">MOD_LASSANA_STORITVE_FIELD_ORDERING_RANDOM</option>
+				</field>
+
+			</fieldset>
+
+			<fieldset
+				name="advanced">
+
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+				<field
+					name="moduleclass_sfx"
+					type="text"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC">
+					<option
+						value="1">JGLOBAL_USE_GLOBAL</option>
+					<option
+						value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+
+				<field
+					name="cachemode"
+					type="hidden"
+					default="itemid">
+					<option
+						value="itemid"></option>
+				</field>
+
+			</fieldset>
+		</fields>
+	</config>
+</extension>
